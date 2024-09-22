@@ -1,3 +1,4 @@
+FROM node:20 AS base
 
 ### <JANGAN DIGANTI>
 ARG STUDENT_NAME
@@ -7,7 +8,7 @@ ENV NUXT_STUDENT_NAME=${STUDENT_NAME}
 ENV NUXT_STUDENT_NIM=${STUDENT_NIM}
 ### </JANGAN DIGANTI>
 
-FROM node:20 AS base
+
 RUN npm install -g http-server
 WORKDIR /app
 COPY package*.json ./
