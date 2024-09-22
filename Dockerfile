@@ -8,8 +8,6 @@ ENV NUXT_STUDENT_NAME=${STUDENT_NAME}
 ENV NUXT_STUDENT_NIM=${STUDENT_NIM}
 ### </JANGAN DIGANTI>
 
-
-RUN npm install -g http-server
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
@@ -18,5 +16,5 @@ RUN npm run build
 
 FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage /app/.output/public /usr/share/nginx/html
-EXPOSE 80
+EXPOSE 3000
 CMD ["nginx", "-g", "daemon off;"]
