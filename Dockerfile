@@ -1,4 +1,4 @@
-FROM node:20 as build-stage
+FROM node:20 as base
 
 ### <JANGAN DIGANTI>
 ARG STUDENT_NAME
@@ -12,9 +12,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
 
-FROM nginx:stable-alpine as production-stage
-COPY --from=build-stage /app/.output/public /usr/share/nginx/html
 EXPOSE 3000
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "run", "dev"]
